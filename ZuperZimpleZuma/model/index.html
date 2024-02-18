@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZuperZimpleZuma</title>
+</head>
+<body>
+  <h1>A console-only game</h1>
+  <h2>Open the console!</h2>
+  <p>Use the following functions to "play" the game:</p>
+  <dl>
+    <dt><code>dump()</code></dt>
+    <dd><i>dumps</i> the content of the model to the console - shows what it contains</dd>
+    <dt><code>randomBall()</code></dt>
+    <dd>returns a random <i>ball</i> - a data-value to be added</dd>
+    <dt><code>add( data )</code></dt>
+    <dd><i>adds</i> the data to the end of the model - returns the node</dd>
+    <dt><code>get( index )</code></dt>
+    <dd>returns the node at the given index - or null if no such index exist</dd>
+    <dt><code>insertBeforeNode( data, existingNode )</code></dt>
+    <dd>creates a new node for <code>data</code>, and inserts it <b>before</b> another node</dd>
+    <dt><code>insertAfterNode( data, existingNode )</code></dt>
+    <dd>creates a new node for <code>data</code>, and inserts it <b>after</b> another node</dd>
+    <dt><code>removeNode( existingNode )</code></dt>
+    <dd>removes an existing node from the model</dd>
+
+  </dl>
+  <script src="script.js"></script>
+</body>
+</html>
