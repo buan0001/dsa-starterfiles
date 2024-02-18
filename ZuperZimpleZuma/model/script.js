@@ -85,23 +85,3 @@ function removeNode( existingNode ) {
   if(existingNode.next)
     existingNode.next.prev = existingNode.prev;
 }
-
-// -------- EXTRA - Remove this from distribution ---------
-
-function findMatchesAround( node ) {
-  const matches = [];
-  // find matches before
-  let before = node;
-  while(before != null && before.data === node.data) {
-    matches.push(before);
-    before = before.prev;
-  }
-  // find matches after
-  let after = node.next;
-  while(after != null && after.data === node.data) {
-    matches.push(after);
-    after = after.next;
-  }
-
-  return matches;
-}
