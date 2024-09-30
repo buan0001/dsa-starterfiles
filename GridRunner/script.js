@@ -2,7 +2,8 @@
 
 window.addEventListener("load", start);
 
-// ******** CONTROLLER ********
+// ****** CONTROLLER ******
+// #region controller
 
 function start() {
   console.log(`Javascript kører`);
@@ -21,7 +22,10 @@ function tick() {
   displayBoard();
 }
 
-// ******** MODEL ********
+// #endregion controller
+
+// ****** MODEL ******
+// #region model
 const model = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -43,7 +47,10 @@ function readFromCell(row, col) {
   return model[row][col];
 }
 
-// ******** VIEW ********
+// #endregion model
+
+// ****** VIEW ******
+// #region view
 
 function displayBoard() {
   const cells = document.querySelectorAll("#grid .cell");
@@ -65,3 +72,5 @@ function displayBoard() {
     }
   }
 }
+
+// #endregion view
