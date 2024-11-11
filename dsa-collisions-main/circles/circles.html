@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Circles - collision detection</title>
+    <link rel="stylesheet" href="circles.css" />
+  </head>
+  <body>
+    <h1>Circles</h1>
+    <h2>collision detection</h2>
+    <main>
+      <div id="gamefield">
+        <div id="player"></div>
+        <div id="object"></div>
+        <svg id="geometry" class="hidden">
+          <line id="distance" x1="150" y1="100" x2="300" y2="200" stroke="yellow" stroke-width="2"></line>
+          <line id="deltaX" x1="150" y1="100" x2="300" y2="100" stroke="white"></line>
+          <line id="deltaY" x1="150" y1="100" x2="300" y2="100" stroke="white"></line>
+          <rect id="tinyRect" x1="150" y1="100" width="10" height="10" stroke="white" fill="transparent"> </rect>
+        </svg>
+      </div>
+      <div id="info">
+        <h2>Player</h2>
+        <p>
+          x:
+          <input type="number" name="player-x" id="player-x">,
+          y: 
+          <input type="number" name="player-y" id="player-y">&nbsp-
+          r: 
+          <input type="number" name="player-r" id="player-r">
+        </p>
+
+        <h2>Object</h2>
+        <p>
+          x:
+          <input type="number" name="object-x" id="object-x">,
+          y: 
+          <input type="number" name="object-y" id="object-y">&nbsp-
+          r: 
+          <input type="number" name="object-r" id="object-r">
+        </p>
+
+        <hr />
+
+        <h2>Collision?</h2>
+        <p id="collision-status">No collision ...</p>
+        <hr>
+        <label><input type="checkbox" name="" id="show-geometry">Show geometry</label>
+      </div>
+    </main>
+
+    <script src="circles.js"></script>
+  </body>
+</html>

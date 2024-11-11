@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rectangles - collision-detection</title>
+  <link rel="stylesheet" href="rectangles.css">
+</head>
+<body>
+  <h1>Rectangles</h1>
+  <h2>collision detection</h2>
+
+  <main>
+    <div id="gamefield">
+      <div id="player"></div>
+      <div id="object"></div>
+      <svg id="geometry" class="hidden">
+        <pattern id="diagonalTop" width="10" height="10" patternTransform="rotate(75 0 0)" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="0" x2="0" y2="10" style="stroke:#ff9944; stroke-width:1" />
+        </pattern>
+        <pattern id="diagonalBottom" width="10" height="10" patternTransform="rotate(-75 0 0)" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="0" x2="0" y2="10" style="stroke:#76c936; stroke-width:1" />
+        </pattern>
+        <pattern id="diagonalLeft" width="10" height="10" patternTransform="rotate(25 0 0)" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="0" x2="0" y2="10" style="stroke:#44a8ff; stroke-width:1" />
+        </pattern>
+        <pattern id="diagonalRight" width="10" height="10" patternTransform="rotate(-25 0 0)" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="0" x2="0" y2="10" style="stroke:#ff44d3; stroke-width:1" />
+        </pattern>
+
+        <g class="object lines">
+          <line id="objectLeft" x1="150" y1="0" x2="150" y2="1000"></line>
+          <line id="objectRight" x1="150" y1="0" x2="150" y2="1000"></line>
+          <line id="objectTop" x1="150" y1="100" x2="300" y2="100"></line>
+          <line id="objectBottom" x1="150" y1="100" x2="300" y2="100"></line>
+        </g>
+        <g class="player lines">
+          <line id="playerLeft" x1="150" y1="0" x2="150" y2="1000"></line>
+          <line id="playerRight" x1="150" y1="0" x2="150" y2="1000"></line>
+          <line id="playerTop" x1="150" y1="100" x2="300" y2="100"></line>
+          <line id="playerBottom" x1="150" y1="100" x2="300" y2="100"></line>
+        </g>
+
+        <g class="overlaps">
+          <rect id="overlapObjectTop" x1="150" y1="100" width="150" height="100" stroke="transparent" fill="url(#diagonalTop)"> </rect>
+          <rect id="overlapObjectBottom" x1="150" y1="100" width="150" height="100" stroke="transparent" fill="url(#diagonalBottom)"> </rect>
+          <rect id="overlapObjectLeft" x1="150" y1="100" width="150" height="100" stroke="transparent" fill="url(#diagonalLeft)"> </rect>
+          <rect id="overlapObjectRight" x1="150" y1="100" width="150" height="100" stroke="transparent" fill="url(#diagonalRight)"> </rect>
+        </g>
+      </svg>
+    </div>
+    <div id="info">
+      <h2>Player</h2>
+      <p>
+        x: <input type="number" name="player-x" id="player-x">,
+        y: <input type="number" name="player-y" id="player-y">
+        &nbsp;
+        w: <input type="number" name="player-w" id="player-w">,
+        h: <input type="number" name="player-h" id="player-h">
+      </p>
+
+      <h2>Object</h2>
+      <p>
+        x: <input type="number" name="object-x" id="object-x">,
+        y: <input type="number" name="object-y" id="object-y">
+        &nbsp;
+        w: <input type="number" name="object-w" id="object-w">,
+        h: <input type="number" name="object-h" id="object-h">
+      </p>
+
+      <hr />
+
+      <h2>Collision?</h2>
+      <p id="collision-status">No collision ...</p>
+      <hr>
+
+      <form id="geometry-settings">
+        <fieldset class="geometry" disabled>
+          <legend>
+            <label><input type="checkbox" name="show" id="show-geometry">Show geometry</label>
+          </legend>
+        
+          <fieldset class="lines">
+            <legend>
+          <label><input type="checkbox" checked name="lines" id="geometry-lines">Lines</label>
+            </legend>
+          </fieldset>
+          
+          <fieldset class="overlaps">
+            <legend>
+              <label><input type="checkbox" checked name="overlaps" id="geometry-overlaps">Overlaps</label>
+            </legend>
+            <label><span>↧</span><input type="checkbox" checked name="" id="geometry-top">Top
+            <input type="color" name="" id="color-top" value="#ff9944"></label>
+            <label><span>↥</span><input type="checkbox" checked name="" id="geometry-bottom">Bottom
+            <input type="color" name="" id="color-bottom" value="#76c936"></label>
+            <label><span>↦</span><input type="checkbox" checked name="" id="geometry-left">Left
+            <input type="color" name="" id="color-left" value="#44a8ff"></label>
+            <label><span>↤</span><input type="checkbox" checked name="" id="geometry-right">Right
+            <input type="color" name="" id="color-right" value="#ff44d3"></label>
+          </fieldset>
+        </fieldset>
+      </form>
+    </div>
+  </main>
+  
+  <script src="rectangles.js"></script>
+</body>
+</html>

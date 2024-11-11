@@ -1,0 +1,101 @@
+body {
+  background-color: #666;
+  color: #6e6;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  display: flex;
+  gap: 1em;
+}
+
+#info {
+  border: 1px solid lightgreen;
+  flex-grow: 1;
+  padding: 1em;
+  font-family: "Courier New", Courier, monospace;
+}
+
+#info h2:first-child {
+  margin-block-start: .1em;
+}
+
+#info p {
+  display: flex;
+}
+
+#info hr {
+  margin-block: 1.5em;
+  border-color: #4b4;
+}
+
+input[type="number"] {
+  background-color: #5b5b5b;
+  color: #6e6;
+  font-family: inherit;
+  text-align: right;
+  width: 4em;
+}
+
+#gamefield {
+  border: 1px solid lightgreen;
+  width: calc(20 * 32px);
+  height: calc(12 * 32px);
+
+  position: relative;
+}
+
+#player {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 64px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  translate: calc(var(--x) * 1px - 50%) calc(var(--y) * 1px - 50%);
+  color: blue;
+  background-color: currentColor;
+  opacity: 0.5;
+}
+
+#object {
+  --x: 0;
+  --y: 0;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+
+  width: 180px;
+
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  translate: calc(var(--x) * 1px - 50%) calc(var(--y) * 1px - 50%);
+  color: red;
+  background-color: currentColor;
+  opacity: 0.5;
+}
+
+#object.collision {
+  outline: 1px solid yellow;
+}
+
+.collision {
+  animation: flash-yellow 1s ease-in-out infinite alternate;
+}
+
+@keyframes flash-yellow {
+  to {
+    color: yellow;
+  }
+}
+
+/* SVG GEOMETRY */
+svg#geometry {
+  width: 100%;
+  height: 100%;
+}
+
+.hidden {
+  visibility: hidden;
+}
