@@ -2,12 +2,7 @@ window.addEventListener("load", start);
 
 function start() {
   console.log("Ready.");
-  let root = tree.createRootNode(50);
-  // TODO: when the addItem function is working - remove this line:
-  buildTreeManually(root);
-
-  // TODO when: the addItem function is working, comment these lines back in:
-  /*
+  tree.createRootNode(50);
   tree.addItem(30);
   tree.addItem(70);
   tree.addItem(20);
@@ -17,17 +12,17 @@ function start() {
   tree.addItem(45);
   tree.addItem(60);
   tree.addItem(80);
-*/
-
-
+  for (let i = 11; i < 15; i++) {
+    tree.addItem(i);
+  }
+  tree.print();
 }
 
 /* A temporary function to build a tree manually.
- * 
+ *
  * To be replaced by calls to ```tree.addItem( )``` ASAP
  */
 function buildTreeManually(rootNode) {
-  
   rootNode.left = tree.createChild(30, rootNode);
   rootNode.right = tree.createChild(70, rootNode);
 
@@ -40,11 +35,11 @@ function buildTreeManually(rootNode) {
   let ltree1 = ltree.left;
   ltree1.left = tree.createChild(10, ltree1);
   ltree1.right = tree.createChild(25, ltree1);
-  
+
   let ltree2 = ltree.right;
   // ltree2 does not have a left-child yet
   ltree2.right = tree.createChild(45, ltree);
-  
+
   // now create the right subtree
   let rtree = rootNode.right;
   rtree.left = tree.createChild(60, rtree);
@@ -56,9 +51,71 @@ class BinaryTree {
     this.root = null;
   }
 
+  skew(node) {
+    let leftHeight = node.left ? node.left.height : 0;
+    let rightHeight = node.right ? node.right.height : 0;
+    const heightDiff = rightHeight - leftHeight;
+    console.log("HeightDiff:", heightDiff);
+
+    return heightDiff;
+    // if (leftHeight + 1 < rightHeight || leftHeight > rightHeight + 1){
+    //   return true
+    // }
+  }
+
   createRootNode(item) {
     this.root = this.createChild(item);
     return this.root;
+  }
+
+  recursivePrint(node = this.root) {
+    if (node.left) this.recursivePrint(node.left);
+    console.log(node.item);
+    if (node.right) this.recursivePrint(node.right);
+  }
+
+  addItem(value) {
+    let current = this.root;
+    while (current) {
+      if (current.item > value) {
+        if (current.left) {
+          current = current.left;
+        } else {
+          current.left = this.createChild(value, current);
+          this.maintain(current);
+          return;
+        }
+      } else if (current.item < value) {
+        if (current.right) {
+          current = current.right;
+        } else {
+          current.right = this.createChild(value, current);
+          this.maintain(current);
+          return;
+        }
+      }
+      // value is equal to the current - we dont want duplicates, so return!!
+      else {
+        console.error("Duplicate value");
+
+        return;
+      }
+    }
+  }
+
+  updateHeight(node) {
+    let leftHeight = node.left ? node.left.height : -1;
+    let rightHeight = node.right ? node.right.height : -1;
+
+    node.height = Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  maintain(node) {
+    this.updateHeight(node);
+    this.skew(node)
+    if (node.parent) {
+      this.maintain(node.parent);
+    }
   }
 
   createChild(item, parent = null) {
@@ -67,19 +124,16 @@ class BinaryTree {
       left: null,
       right: null,
       item: item,
-      height: 0
+      height: 0,
     };
   }
-
-  /* TODO: Add more methods here: e.g. addItem( itemValue ) */
-
 
   print() {
     // Print the tree in a nice way - by creating a (jagged) 2D array of the tree
     // each level (starting from root) is an array in the array that doubles in size from the previous level
 
     // breaks if the tree is too deep - but that's a problem for another day
-     
+
     // Use DFS to fill array with values
     const treeArray = [];
     let height = 0; // and while we're at it, calculate the height of the tree
@@ -95,7 +149,7 @@ class BinaryTree {
       }
       height = Math.max(height, depth);
       // insert this node value in the 2D array
-      if(!treeArray[depth]) treeArray[depth] = [];
+      if (!treeArray[depth]) treeArray[depth] = [];
       treeArray[depth][indent] = node.item;
       // visit its children - remember to double indent
       buildTreeArray(node.left, depth + 1, indent * 2);
@@ -151,13 +205,15 @@ class BinaryTree {
         // if only one child is, show it as underscores _
         const showUndefined = !values[i - (i % 2)] && !values[i - (i % 2) + 1] ? " " : "_";
         // if depth is lowest (height-1) - pad values to two characters
-        if (depth == height)  {
+        if (depth == height) {
           treeString += String(values[i] ?? showUndefined.repeat(2)).padStart(2, " ");
           // and add a single space
           treeString += " ";
         } else {
           // otherwise center values in block of three
-          treeString += String(values[i] ?? showUndefined.repeat(3)).padEnd(2, " ").padStart(3, " ");
+          treeString += String(values[i] ?? showUndefined.repeat(3))
+            .padEnd(2, " ")
+            .padStart(3, " ");
 
           // and add twice the indentation of spaces + 1 in the middle
           treeString += " ".repeat(indent - 1);
